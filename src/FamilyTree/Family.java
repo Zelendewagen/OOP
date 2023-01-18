@@ -24,12 +24,19 @@ public class Family {
             i.viewAll();
         }
     }
-    public void getTree(Member member, int count) {
-        String branch = "|".repeat(count);
-        String space = " ".repeat(count);
 
-        System.out.print(space + branch);
-        System.out.println(member.name);
+    public void getTree(Member member, int count) {
+        String space = "  ".repeat(count);
+        String branch = "└─";
+        String line = "├─";
+
+        if (count < 1) {
+            System.out.println(member.name);
+        }
+        else {
+            System.out.print(space + branch);
+            System.out.println(member.name);
+        }
         for (Member i : member.childrens) {
             getTree(i, count + 1);
         }

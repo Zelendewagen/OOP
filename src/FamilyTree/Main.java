@@ -21,6 +21,7 @@ public class Main {
         family.addMember(new Member("Андрей"));
 
 
+
         Member tda = new Member("Дмитрий Андреевич",family.getMember("Наталья Сергеевна"), family.getMember("Андрей"));
         family.memberAddChildren("Наталья Сергеевна", tda);
         family.addMember(tda);
@@ -40,5 +41,6 @@ public class Main {
         family.getTree(family.getMember("Сергей Петрович"),0);
         tda.viewAll();
         tsd.viewAll();
+        family.getMember("Сергей Петрович").viewAll();
     }
 }
