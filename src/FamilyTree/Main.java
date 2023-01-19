@@ -5,33 +5,32 @@ public class Main {
         Family family = new Family();
 
 
-        family.addMember(new Member("Сергей Петрович"));
-        family.addMember(new Member("Людмила Ивановна"));
-        family.addMember(new Member("Наталья Сергеевна"));
-        family.memberAddChildren("Сергей Петрович", family.getMember("Наталья Сергеевна"));
-        family.memberAddChildren("Людмила Ивановна", family.getMember("Наталья Сергеевна"));
-        family.memberSetFather("Наталья Сергеевна", family.getMember("Сергей Петрович"));
-        family.memberSetMother("Наталья Сергеевна", family.getMember("Людмила Ивановна"));
-        family.addMember(new Member("Юлия Сергеевна"));
-        family.memberAddChildren("Сергей Петрович", family.getMember("Юлия Сергеевна"));
-        family.memberAddChildren("Людмила Ивановна", family.getMember("Юлия Сергеевна"));
-        family.memberSetSister("Юлия Сергеевна", family.getMember("Наталья Сергеевна"));
-        family.memberSetFather("Юлия Сергеевна", family.getMember("Сергей Петрович"));
-        family.memberSetMother("Юлия Сергеевна", family.getMember("Людмила Ивановна"));
-        family.addMember(new Member("Андрей"));
+        family.addMember(new Human("Сергей Петрович"));
+        family.addMember(new Human("Людмила Ивановна"));
+        family.addMember(new Human("Наталья Сергеевна"));
+        family.memberAddChildren(family.getMember("Сергей Петрович"), family.getMember("Наталья Сергеевна"));
+        family.memberAddChildren(family.getMember("Людмила Ивановна"), family.getMember("Наталья Сергеевна"));
+        family.memberSetFather(family.getMember("Наталья Сергеевна"), family.getMember("Сергей Петрович"));
+        family.memberSetMother(family.getMember("Наталья Сергеевна"), family.getMember("Людмила Ивановна"));
+        family.addMember(new Human("Юлия Сергеевна"));
+        family.memberAddChildren(family.getMember("Сергей Петрович"), family.getMember("Юлия Сергеевна"));
+        family.memberAddChildren(family.getMember("Людмила Ивановна"), family.getMember("Юлия Сергеевна"));
+        family.memberSetFather(family.getMember("Юлия Сергеевна"), family.getMember("Сергей Петрович"));
+        family.memberSetMother(family.getMember("Юлия Сергеевна"), family.getMember("Людмила Ивановна"));
+        family.addMember(new Human("Андрей"));
 
 
 
-        Member tda = new Member("Дмитрий Андреевич",family.getMember("Наталья Сергеевна"), family.getMember("Андрей"));
-        family.memberAddChildren("Наталья Сергеевна", tda);
+        Human tda = new Human("Дмитрий Андреевич",family.getMember("Наталья Сергеевна"), family.getMember("Андрей"));
+        family.memberAddChildren(family.getMember("Наталья Сергеевна"), tda);
         family.addMember(tda);
 
-        Member tsd = new Member("София Дмитриевна");
+        Human tsd = new Human("София Дмитриевна");
         tda.addChildren(tsd);
         family.addMember(tsd);
 
 
-        Member ted = new Member("Есения Дмитриевна");
+        Human ted = new Human("Есения Дмитриевна");
         tda.addChildren(ted);
         family.addMember(tsd);
 
@@ -39,8 +38,15 @@ public class Main {
 
 
         family.getTree(family.getMember("Сергей Петрович"),0);
-        tda.viewAll();
-        tsd.viewAll();
-        family.getMember("Сергей Петрович").viewAll();
+        tda.viewAllInfo();
+        tsd.viewAllInfo();
+        family.getMember("Сергей Петрович").viewAllInfo();
+
+        Pet mark = new Pet("Mark", tda);
+        tda.setPet(mark);
+        tda.getPet();
+        mark.getHost();
+
+
     }
 }

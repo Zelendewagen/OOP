@@ -3,14 +3,18 @@ package FamilyTree;
 import java.util.*;
 
 public class Family {
-    private List<Member> lst = new ArrayList<>();
+    private List<Human> lst = new ArrayList<>();
 
-    public void addMember(Member member) {
+
+    Family() {
+    }
+
+    public void addMember(Human member) {
         lst.add(member);
     }
 
-    public Member getMember(String name) {
-        for (Member i : lst) {
+    public Human getMember(String name) {
+        for (Human i : lst) {
             if (i.getName().equals(name)) {
                 return i;
             }
@@ -20,71 +24,37 @@ public class Family {
     }
 
     public void getListMembers() {
-        for (Member i : this.lst) {
-            i.viewAll();
+        for (Human i : this.lst) {
+            i.viewAllInfo();
         }
     }
 
-    public void getTree(Member member, int count) {
+    public void getTree(Human member, int count) {
         String space = "  ".repeat(count);
         String branch = "└─";
         String line = "├─";
 
         if (count < 1) {
-            System.out.println(member.name);
-        }
-        else {
+            System.out.println(member.getName());
+        } else {
             System.out.print(space + branch);
-            System.out.println(member.name);
+            System.out.println(member.getName());
         }
-        for (Member i : member.childrens) {
+        for (Human i : member.getChildrens()) {
             getTree(i, count + 1);
         }
 
     }
 
-    public void memberSetFather(String name, Member father) {
-        for (Member i : lst) {
-            if (i.getName().equals(name)) {
-                i.setFather(father);
-            }
-        }
+    public void memberSetFather(Human human, Human father) {
+        human.setFather(father);
     }
 
-    public void memberSetMother(String name, Member mother) {
-        for (Member i : lst) {
-            if (i.getName().equals(name)) {
-                i.setMother(mother);
-            }
-        }
+    public void memberSetMother(Human human, Human mother) {
+        human.setMother(mother);
     }
 
-    public void memberSetBrother(String name, Member brother) {
-        for (Member i : lst) {
-            if (i.getName().equals(name)) {
-                i.setBrother(brother);
-            }
-        }
-    }
-
-    public void memberSetSister(String name, Member sister) {
-        for (Member i : lst) {
-            if (i.getName().equals(name)) {
-                i.setSister(sister);
-            }
-        }
-    }
-
-    public void memberAddChildren(String name, Member children) {
-        boolean check = false;
-        for (Member i : lst) {
-            if (i.getName().equals(name)) {
-                i.addChildren(children);
-                check = true;
-            }
-        }
-        if (!check) {
-            System.out.printf("Не найден родсвенник с именем %s", name);
-        }
+    public void memberAddChildren(Human human, Human children) {
+        human.addChildren(children);
     }
 }
