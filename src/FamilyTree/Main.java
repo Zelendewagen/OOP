@@ -6,46 +6,47 @@ public class Main {
 
 
         family.addMember(new Human("Сергей Петрович"));
-        family.addMember(new Human("Людмила Ивановна"));
         family.addMember(new Human("Наталья Сергеевна"));
-        family.memberAddChildren(family.getMember("Сергей Петрович"), family.getMember("Наталья Сергеевна"));
-        family.memberAddChildren(family.getMember("Людмила Ивановна"), family.getMember("Наталья Сергеевна"));
         family.memberSetFather(family.getMember("Наталья Сергеевна"), family.getMember("Сергей Петрович"));
-        family.memberSetMother(family.getMember("Наталья Сергеевна"), family.getMember("Людмила Ивановна"));
-        family.addMember(new Human("Юлия Сергеевна"));
-        family.memberAddChildren(family.getMember("Сергей Петрович"), family.getMember("Юлия Сергеевна"));
-        family.memberAddChildren(family.getMember("Людмила Ивановна"), family.getMember("Юлия Сергеевна"));
-        family.memberSetFather(family.getMember("Юлия Сергеевна"), family.getMember("Сергей Петрович"));
-        family.memberSetMother(family.getMember("Юлия Сергеевна"), family.getMember("Людмила Ивановна"));
-        family.addMember(new Human("Андрей"));
 
+        Human july = new Human("Юлия Сергеевна");
+        family.addMember(july);
+        family.memberSetFather(july, family.getMember("Сергей Петрович"));
 
+        Human andr = new Human("Андрей");
 
-        Human tda = new Human("Дмитрий Андреевич",family.getMember("Наталья Сергеевна"), family.getMember("Андрей"));
-        family.memberAddChildren(family.getMember("Наталья Сергеевна"), tda);
+        Human tda = new Human("Дмитрий Андреевич", family.getMember("Наталья Сергеевна"), andr);
         family.addMember(tda);
 
-        Human tsd = new Human("София Дмитриевна");
-        tda.addChildren(tsd);
+        family.addMember(new Human("Мария"));
+
+        Human tsd = new Human("София Дмитриевна", tda, family.getMember("Мария"));
         family.addMember(tsd);
 
-
-        Human ted = new Human("Есения Дмитриевна");
-        tda.addChildren(ted);
-        family.addMember(tsd);
+        Human ted = new Human("Есения Дмитриевна", tda, family.getMember("Мария"));
+        family.addMember(ted);
 
 
+        family.getTree(family.getMember("Сергей Петрович"), 0);
+        System.out.println();
+
+        Cat mark = new Cat("Mark", "Bengal", family.getMember("Мария"));
+
+        Dog oksana = new Dog("Oksana", "Haski", tsd);
+
+        family.getListMembers();
+        family.getFamilyPets();
+        System.out.println();
+
+        tsd.voice(mark);
+        mark.voice(tsd);
+        System.out.println();
+
+        tda.voice(oksana);
+        oksana.voice(tda);
+        System.out.println();
 
 
-        family.getTree(family.getMember("Сергей Петрович"),0);
-        tda.viewAllInfo();
-        tsd.viewAllInfo();
-        family.getMember("Сергей Петрович").viewAllInfo();
-
-        Pet mark = new Pet("Mark", tda);
-        tda.setPet(mark);
-        tda.getPet();
-        mark.getHost();
 
 
     }

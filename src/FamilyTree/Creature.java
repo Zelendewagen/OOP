@@ -1,11 +1,14 @@
 package FamilyTree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Creature {
-    protected String name;
+    private String name;
+    protected List<Pet> petList = new ArrayList<>();
 
     Creature(String name) {
         this.name = name;
-
     }
 
     public String getName() {
@@ -15,5 +18,10 @@ public abstract class Creature {
     public void rename(String name) {
         this.name = name;
     }
+
+    public List<Pet> getPetList() {
+        return petList;
+    }
+
 
 }

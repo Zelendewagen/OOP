@@ -2,18 +2,18 @@ package FamilyTree;
 
 import java.util.*;
 
-public class Human extends Creature {
-    protected Human mother;
+public class Human extends Creature implements Voice {
+    private Human mother;
     private Human father;
     private List<Human> childrens = new ArrayList<>();
-
-    private Pet pet;
 
 
     Human(String name, Human mother, Human father) {
         super(name);
         this.mother = mother;
         this.father = father;
+        mother.addChildren(this);
+        father.addChildren(this);
     }
 
 
@@ -23,32 +23,28 @@ public class Human extends Creature {
 
 
     public void viewAllInfo() {
-        String fname, mname = "";
-        if (father == null) {
-            fname = "-";
-        } else {
-            fname = father.getName();
-        }
-        if (mother == null) {
-            mname = "-";
-        } else {
-            mname = mother.getName();
-        }
-        System.out.printf("Имя: %s, Мать: %s, Отец: %s, Дети: %s", super.getName(), mname, fname, getNameChildrens());
+        String fname = fatherName();
+        String mname = motherName();
+        System.out.printf("Имя: %s, Мама: %s, Папа: %s, Дети: %s", super.getName(), mname, fname, getNameChildrens());
         System.out.println();
     }
 
-    public String check() {
-        System.out.println(this == null);
-        return "";
+    @Override
+    public void voice(Creature target) {
+        System.out.printf("Hi %s! My name %s", target.getName(), getName());
+        System.out.println();
     }
 
-    public String getName() {
-        return name;
+    public String fatherName() {
+        if (this.father == null) {
+            return "-";
+        } else return father.getName();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String motherName() {
+        if (this.mother == null) {
+            return "-";
+        } else return mother.getName();
     }
 
     public Human getFather() {
@@ -67,12 +63,11 @@ public class Human extends Creature {
         this.mother = mother;
     }
 
-
-    public void addChildren(Human children) {
+    protected void addChildren(Human children) {
         this.childrens.add(children);
     }
 
-    public List<Human> getChildrens() {
+    public List<Human> getChildrensList() {
         return childrens;
     }
 
@@ -82,16 +77,10 @@ public class Human extends Creature {
             childrensNames.append(i.getName() + ", ");
         }
         String result = childrensNames.toString();
-        if (getChildrens().size() > 1) {
+        if (getChildrensList().size() > 0) {
             return result.substring(0, result.length() - 2);
         } else return result;
     }
 
-    public void setPet(Pet name){
-        this.pet = name;
-    }
 
-    public void getPet(){
-        System.out.println(pet.getName());
-    }
 }

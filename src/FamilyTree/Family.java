@@ -3,36 +3,18 @@ package FamilyTree;
 import java.util.*;
 
 public class Family {
-    private List<Human> lst = new ArrayList<>();
-
+    private List<Human> familyList = new ArrayList<>();
 
     Family() {
     }
 
     public void addMember(Human member) {
-        lst.add(member);
-    }
-
-    public Human getMember(String name) {
-        for (Human i : lst) {
-            if (i.getName().equals(name)) {
-                return i;
-            }
-        }
-        System.out.println("Kek");
-        return null;
-    }
-
-    public void getListMembers() {
-        for (Human i : this.lst) {
-            i.viewAllInfo();
-        }
+        familyList.add(member);
     }
 
     public void getTree(Human member, int count) {
         String space = "  ".repeat(count);
         String branch = "└─";
-        String line = "├─";
 
         if (count < 1) {
             System.out.println(member.getName());
@@ -40,21 +22,46 @@ public class Family {
             System.out.print(space + branch);
             System.out.println(member.getName());
         }
-        for (Human i : member.getChildrens()) {
+        for (Human i : member.getChildrensList()) {
             getTree(i, count + 1);
         }
 
     }
 
-    public void memberSetFather(Human human, Human father) {
-        human.setFather(father);
+    public Human getMember(String name) {
+        for (Human i : familyList) {
+            if (i.getName().equals(name)) {
+                return i;
+            }
+        }
+        System.out.printf("Kek человека с именем '%s' нету", name);
+        System.out.println();
+        return null;
     }
 
-    public void memberSetMother(Human human, Human mother) {
-        human.setMother(mother);
+    public void getListMembers() {
+        for (Human i : this.familyList) {
+            i.viewAllInfo();
+        }
     }
 
-    public void memberAddChildren(Human human, Human children) {
-        human.addChildren(children);
+    public void memberSetFather(Human children, Human father) {
+        children.setFather(father);
+        father.addChildren(children);
+    }
+
+    public void memberSetMother(Human children, Human mother) {
+        children.setMother(mother);
+        mother.addChildren(children);
+    }
+
+    public void getFamilyPets() {
+        for (Creature i : familyList) {
+            if (i.getPetList().size() > 0) {
+                for (Pet j : i.getPetList()) {
+                    System.out.println(j.getInfo());
+                }
+            }
+        }
     }
 }
