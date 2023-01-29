@@ -3,7 +3,6 @@ package TaskManager.UI;
 import TaskManager.MVP.Model;
 import TaskManager.MVP.Presenter;
 import TaskManager.MVP.View;
-
 import java.util.Scanner;
 
 public class App {

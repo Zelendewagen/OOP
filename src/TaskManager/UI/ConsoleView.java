@@ -15,7 +15,7 @@ public class ConsoleView implements View {
 
     @Override
     public Integer getID() {
-        System.out.printf("Укажите ИД: ");
+        System.out.printf("ИД: ");
         return Integer.parseInt(scan.nextLine());
     }
 
