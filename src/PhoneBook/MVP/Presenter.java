@@ -18,10 +18,9 @@ public class Presenter {
             view.print("Список пуст");
             return false;
         }
-        try {
-            model.getContact(id);
+        if (model.getContact(id) != null) {
             return true;
-        } catch (Exception e) {
+        } else {
             view.print("Нет контакта с таким ИД");
             return false;
         }
@@ -29,8 +28,8 @@ public class Presenter {
 
     public void showContacts() {
         if (model.getPhonebook().size() > 0) {
-            for (int i = 0; i < model.getPhonebook().size(); i++) {
-                view.print(model.getContact(i).getInfo());
+            for (Contact contact : model.getPhonebook()) {
+                view.print(contact.getInfo());
             }
         } else {
             view.print("Список пуст");
@@ -62,10 +61,10 @@ public class Presenter {
     }
 
     public void load() {
-
+        model.load();
     }
 
     public void save() {
-
+        model.save();
     }
 }
